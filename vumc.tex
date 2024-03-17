@@ -1,0 +1,94 @@
+\def\handout{0}   % set to 1 to produce 4-up handouts instead of slides
+\def\notes{0}     % set to 1 to show \note{}s
+\ifnum\handout=1  % see above for an alternative which uses two preamble files
+\documentclass[handout,13pt,compress,c]{beamer}
+\usepackage{pgfpages}
+\pgfpagesuselayout{4 on 1}[letterpaper,landscape,border shrink=4mm]
+% or: \pgfpagesuselayout{2 on 1}[letterpaper,border shrink=4mm]
+\setbeamertemplate{footline}[page number]   % omit if don't want slide number at bottom right
+% use \setbeamertemplate{footline}[text line]{xxxx} if you want xxxx at bottom left of each slide
+% use \setbeamertemplate{footline}[text line]{xxxx\hfill\thepage}
+%  if you want xxxx at bottom left, page # at bottom right
+\else
+\documentclass[13pt,compress,c]{beamer}
+\fi
+
+\usetheme{PaloAlto}
+% Also try Warsaw, Malmoe, Madrid, Berlin, Darmstadt; see
+%  /usr/share/texmf/tex/latex/beamer/themes/theme and the above gallery.
+% PaloAlto has section and subsection titles in left panel with highlighting
+% Darnstadt shows section names at top with progress bubbles
+% Optional: \usefonttheme{serif}
+% Another nice theme courtesy of David Airey:
+% \usetheme[secheader]{Boadilla}                                                                                                                                       
+% \definecolor{mygold}{rgb}{0.85, 0.60, 0.00}                                                                                                                          
+% \usecolortheme[named=mygold]{structure}                                                                                                                              
+% \setbeamercovered{dynamic}                                                                                                                                           
+
+\usepackage{graphicx}
+\usepackage{natbib}           % for author year citations \citet \citep
+\usepackage{relsize}          % for \smaller etc.
+\DeclareGraphicsExtensions{.pdf, .jpg, .png}
+
+\setbeamercolor{normal text}{bg=blue!5}
+%\setbeamertemplate{headline}[infolines theme]
+%\setbeamercolor{title}{fg=black!80!black,bg=blue!20!white}
+\ifnum\notes=1 \setbeameroption{show notes} \fi
+
+\newcommand{\ft}[1]{\frametitle{#1}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+
+%Macros to make graphics insertions easy
+%Command for sizing to width    \figw{file}{fraction of \textwidth}
+\newcommand{\figw}[2]{\centerline{\includegraphics[width=#2\textwidth]{#1}}}
+%Command for sizing to height   \figh{file}{fraction of \textheight}
+\newcommand{\figh}[2]{\centerline{\includegraphics[height=#2\textheight]{#1}}}
+%Use \figh{graphics file name}{1} to size to whole text height
+%For graphics needing no shrinkage:  \fig{file}
+\newcommand{\fig}[1]{\centerline{\includegraphics{#1}}}
+
+\newcommand{\foot}[1]{\footnotetext{#1}}  % smaller text in bottom margin, e.g. citations
+\makeatletter
+\renewcommand\@makefntext[1]{\noindent#1} % see p. 114 of LaTeX Companion 2nd edition
+\makeatother
+\renewcommand\footnoterule{}
+\def\newblock{\hskip .11em plus .33em minus .07em}
+
+\logo{\figw{biostatLogo.jpg}{.123}
+
+\title[Short Title]{Long Title}
+\author[]{Jane Smith}
+\institute{Department of Biostatistics, Vanderbilt University School
+  of Medicine}
+\date{\textsc{Meeting Title}\hfill presentation date}
+
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{
+   \ft{Outline}
+\tableofcontents
+}
+
+
+
+\begin{center}      % omit this and next 5 lines if no bibliography
+\textbf{References}
+\end{center}
+\smaller[5]
+\bibliographystyle{abbrvnat}
+\bibliography{/home/harrelfe/bib/feh}
+
+%Note: If references will fit on one slide use:
+\frame{
+\ft{References}
+\smaller[5]
+\bibliographystyle{...}
+\bibliography{...}
+}
+
+\end{document}
