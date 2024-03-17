@@ -43,7 +43,7 @@ knitr::opts_chunk$set(include=F,echo = F,message = F,warning = F)
 
 ## Introduction
 
-Hypothetically, you found a procedure $X$ is associated with survival with a small HIV cohort in Mexico, now, you want to generalize this finding to a larger cohort.
+Hypothetically, you found a procedure $X$ is associated with survival with a small cohort, now, you want to generalize this finding to a larger cohort.
 
 **How difficult it is to get a hand on the data?**
 
@@ -61,7 +61,7 @@ Journal or funding agency request the data you use for analysis as supplements:
 
 **What about publishing the data?**
 
--   Re-identity risk/ Privacy concern/ Patient stigmatized
+-   Re-identification risk/ Privacy concern/ Patient stigmatized
 
 -   HIPAA, General Data Protection Regulation (GDPR)
 
@@ -79,7 +79,7 @@ Currently, privacy regulation is a gap for open science
 
 -   Application
 
--   CITI, HIPPA training, Data center training
+-   CITI, HIPAA training, Data center training
 
 -   Access the data only in facility or use VPN
 
@@ -89,7 +89,7 @@ Currently, privacy regulation is a gap for open science
 ::: {.column width="50%"}
 **What about publishing the data?**\newline
 
--   Re-identity risk/ Privacy concern/ Patient stigmatized
+-   Re-identification risk/ Privacy concern/ Patient stigmatized
 
 -   HIPAA,General Data Protection Regulation (GDPR)
 
@@ -124,10 +124,10 @@ Currently, privacy regulation is a gap for open science
 **Synthetic data with Machine Learning**
 
 -   **No real record/patient is in the data**, but it reflects the true data
--   **Since it is not real, it provide a workaround of current regulations**
+-   **Since it is not real, it provides a workaround of current regulations**
 -   Minimum assumptions or constraints with respect to the associations between variables
 -   And there has been example that using both real and synthetic data together can increase accuracy
--   There are already freely available synthetic database for research ie. The Synthetic Data Vault
+-   There are already freely available synthetic databases for research i.e., The Synthetic Data Vault
 
 ## Synthetic Data
 
@@ -161,7 +161,7 @@ To Recap:
 
 ::: columns
 ::: {.column width="67%"}
-![Zhang, Ziqi et al. JAMIA vol. 27,1 (2020)](gan_model.png){fig-align="center"}
+![EMR-WGAN: Zhang, Ziqi et al. JAMIA vol. 27,1 (2020)](gan_model.png){fig-align="center"}
 :::
 
 ::: {.column width="33%"}
@@ -184,6 +184,8 @@ To Recap:
 -   We use CCASAnet dataset enrolled before 2022.
 
 -   Need to transform into Machine Learning Format
+
+-   Data was split into training(80%) and testing set
 
 -   There is a detailed [[tutorial and code]{.underline}](https://github.com/yanchao0222/tutorial_data_synthesis_and_evaluation/tree/main) by Chao Yan available online
 :::
@@ -239,9 +241,9 @@ Real Data vs. Synthetic Data
 
 ## Data Privacy
 
--   Attribution Risk: How likely unknown attribute values of interest are predicted from a set of leaked attribute values with a trained model from the fake data
+-   Attribution Risk: How likely unknown attribute values of interest are predicted from a set of leaked attribute values(with a trained model from the synthetic data)
 
--   Membership Risk: How likely a real record can be reconstruct from a leak generative model
+-   Membership Risk: How likely a real record can be reconstructed from a leaked generative model
 
 |           | Attribution Risk | Membership Risk |
 |-----------|------------------|-----------------|
@@ -262,14 +264,14 @@ and adjust for:
 sex, calendar year, age, CD4 count, clinical AIDS at ART initiation and ART regimen class
 }
 ```
-| Variable            | HR-Synthetic        | HR-Training         |
-|---------------------|---------------------|---------------------|
-| 100\*CD4            | 0.902 (0.885-0.919) | 0.856 (0.842-0.869) |
-| 10\*Enrollment Year | 0.793 (0.745-0.844) | 0.710 (0.674-0.748) |
-| 10\*Age             | 1.193 (1.155-1.232) | 1.241 (1.206-1.277) |
-| AID Enrollment      | 1.816 (1.678-1.967) | 1.783 (1.671-1.903) |
-| Other vs nnrti      | 2.336 (2.129-2.564) | 1.857 (1.702-2.026) |
-| Pi vs nnrti         | 1.029 (0.905-1.172) | 1.070 (0.958-1.196) |
+| Variable                             | HR-Synthetic        | HR-Training         |
+|----------------------------------|-------------------|-------------------|
+| Diff. in 100 CD4 Counts              | 0.902 (0.885-0.919) | 0.856 (0.842-0.869) |
+| Diff. in 10 Years Between Enrollment | 0.793 (0.745-0.844) | 0.710 (0.674-0.748) |
+| Diff. in 10 Years of Enrollment Age  | 1.193 (1.155-1.232) | 1.241 (1.206-1.277) |
+| AIDS at Enrollment                   | 1.816 (1.678-1.967) | 1.783 (1.671-1.903) |
+| Other vs NNRTI                       | 2.336 (2.129-2.564) | 1.857 (1.702-2.026) |
+| PI vs NNRTI                          | 1.029 (0.905-1.172) | 1.070 (0.958-1.196) |
 
 ## Study Reproduciblity
 
@@ -287,17 +289,17 @@ sex, calendar year, age, CD4 count, clinical AIDS at ART initiation and ART regi
 
 ## Adapt to longitudinal models
 
-![Zhang, Ziqi, et al. JAMIA 28.3 (2021): 596-604.](synteg.jpeg){fig-align="center" width="6.8cm"}
+!["SynTEG": Zhang, Ziqi, et al. JAMIA 28.3 (2021): 596-604.](synteg.jpeg){fig-align="center" width="6.8cm"}
 
 ## Future works
 
--   Missingness is an attribute in EHR data, we want our synthetic data to reflect the missing pattern in the real data when publish
+-   Missingness is an attribute in EHR data, we want our synthetic data to reflect the missing pattern in the real data when published
 
--   So far, because of the limitation of algorithm and computation time, we use only a single imputation method to prepare the data
+-   So far, because of the limitation of algorithm and computation time, we only used single-imputation for training
 
 -   Rare Event (p\<0.001) cannot be properly captured by the model
 
--   It is encouraged to check the data for abnormalities post-generation (ie. male record with Cervical cancer)
+-   It is encouraged to check the data for abnormalities post-generation (i.e., male record with Cervical cancer)
 
 -   Further improve privacy protection
 
@@ -307,7 +309,7 @@ sex, calendar year, age, CD4 count, clinical AIDS at ART initiation and ART regi
 
 -   We developed a version of synthetic dataset for the CCASAnet that replicates the original dataset's structure and variable associations
 
--   It allows researchers to use the data to reproduce the study, identify problems, and produce more results
+-   It allows researchers to use the data to reproduce the study, identify problems, come up with their own hypothesis with the synthetic data and produce more results
 
 -   It shows a path forward for open science, but one must also keep in mind the quality and privacy risk of the data when published and used.
 
@@ -317,7 +319,7 @@ We chose the GAN model because our team has experts in this field and it (SynTEG
 
 We want to point out that other methods are available and produce similar or better results depending on the characteristics of the data.
 
-1.  Theodorou, B., Xiao, C. & Sun, J. Synthesize high-dimensional longitudinal electronic health records via hierarchical autoregressive language model. Nat Commun 14, 5305 (2023). <https://doi.org/10.1038/s41467-023-41093-0>
+1.  Theodorou, B., Xiao, C. & Sun, J. Synthesize high-dimensional longitudinal electronic health records via hierarchical autoregressive language model. Nat Commun 14, 5305 (2023).
 2.  Clinical knowledge base simulation
 3.  Conditional Model for research specific data
 
@@ -325,7 +327,7 @@ We want to point out that other methods are available and produce similar or bet
 
 ::: columns
 ::: {.column width="20%"}
-![](https://www.vumc.org/biostatistics/sites/default/files/people/BryanShepherd%20%281%29.jpeg){width="85"} Bryan E.Shepherd, PhD
+![](https://www.vumc.org/biostatistics/sites/default/files/people/BryanShepherd%20%281%29.jpeg){width="85"} Bryan E. Shepherd, PhD
 :::
 
 ::: {.column width="20%"}
@@ -333,11 +335,11 @@ We want to point out that other methods are available and produce similar or bet
 :::
 
 ::: {.column width="20%"}
-![](https://www.vumc.org/dbmi/sites/default/files/people/Duda_Stephany_dbmi.png){width="70"} Stephany N.Duda, PhD
+![](https://www.vumc.org/dbmi/sites/default/files/people/Duda_Stephany_dbmi.png){width="70"} Stephany N. Duda, PhD
 :::
 
 ::: {.column width="20%"}
-![](https://www.vumc.org/biostatistics/sites/default/files/people/Malin_Bradley%202_0.jpg){width="71"} Bradley Malin, PhD
+![](https://www.vumc.org/biostatistics/sites/default/files/people/Malin_Bradley%202_0.jpg){width="71"} Bradley A. Malin, PhD
 :::
 :::
 
@@ -346,4 +348,4 @@ We want to point out that other methods are available and produce similar or bet
 \large{\textbf{Thank you}}
 \end{center}
 ```
-NIH and CCASAnet fund this projects
+NIH and CCASAnet fund this project ![](link.png){width="50"} \<= Link to Bio to find this slides
